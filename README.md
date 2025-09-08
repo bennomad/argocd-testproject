@@ -16,7 +16,7 @@ minikube start
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
-kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace argocd
 helm upgrade --install argocd argo/argo-cd -n argocd -f argocd/helm/values.yaml
 ```
 
@@ -26,15 +26,6 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 # open https://localhost:8080 (admin / initial password from secret)
 ```
 
-3) Create DockerHub pull secret (avoid rate limits)
-```bash
-kubectl create namespace demo --dry-run=client -o yaml | kubectl apply -f -
-kubectl create secret docker-registry dockerhub \
-  --docker-server=https://index.docker.io/v1/ \
-  --docker-username=YOUR_DOCKERHUB_USERNAME \
-  --docker-password=YOUR_DOCKERHUB_PASSWORD \
-  -n demo --dry-run=client -o yaml | kubectl apply -f -
-```
 
 4) Bootstrap via app-of-apps
 ```bash
