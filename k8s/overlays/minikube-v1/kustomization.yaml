@@ -4,7 +4,7 @@ resources:
 nameSuffix: -v1
 images:
   - name: nginx
-    newTag: 1.25.1
+    newTag: 1.25.0
 patches:
   - target:
       kind: Service
