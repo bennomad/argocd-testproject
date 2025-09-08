@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-minikube-v1
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/bennomad/argocd-testproject.git
+    targetRevision: HEAD
+    path: k8s/overlays/minikube-v1
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+

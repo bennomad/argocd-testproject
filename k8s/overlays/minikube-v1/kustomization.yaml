@@ -1,0 +1,16 @@
+namespace: demo
+resources:
+  - ../../base
+nameSuffix: -v1
+images:
+  - name: nginx
+    newTag: 1.25.0
+patches:
+  - target:
+      kind: Service
+      name: demo-web
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: NodePort
+
